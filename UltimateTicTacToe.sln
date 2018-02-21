@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimateTicTacToe", "UltimateTicTacToe\UltimateTicTacToe.csproj", "{C561ED2E-92AB-4F33-89DA-517BDA25D0B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimateTicTacToe.Web", "UltimateTicTacToe.Web\UltimateTicTacToe.Web.csproj", "{C561ED2E-92AB-4F33-89DA-517BDA25D0B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
