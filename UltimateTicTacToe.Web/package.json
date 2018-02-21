@@ -1,0 +1,16 @@
+{
+  "name": "ultimatetictactoe.web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@aspnet/signalr-client": "^1.0.0-alpha2-final"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
