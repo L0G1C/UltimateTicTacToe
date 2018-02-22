@@ -50,7 +50,7 @@ namespace UltimateTicTacToe
 
             app.UseSignalR(routes =>
             {
-                routes.MapHub<Game>("game");
+                routes.MapHub<GameHub>("gamehub");
             });
         }
     }
