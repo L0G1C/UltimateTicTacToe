@@ -5,12 +5,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\game.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0-alpha2-final" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\scripts\signalr-client-1.0.0-alpha2-final.js" />
+    <None Include="wwwroot\scripts\signalr-client-1.0.0-alpha2-final.min.js" />
+    <None Include="wwwroot\scripts\signalr-clientES5-1.0.0-alpha2-final.js" />
+    <None Include="wwwroot\scripts\signalr-clientES5-1.0.0-alpha2-final.min.js" />
+    <None Include="wwwroot\scripts\signalr-msgpackprotocol-1.0.0-alpha2-final.js" />
+    <None Include="wwwroot\scripts\signalr-msgpackprotocol-1.0.0-alpha2-final.min.js" />
+    <None Include="wwwroot\scripts\signalr-msgpackprotocolES5-1.0.0-alpha2-final.js" />
+    <None Include="wwwroot\scripts\signalr-msgpackprotocolES5-1.0.0-alpha2-final.min.js" />
   </ItemGroup>
 
 </Project>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using UltimateTicTacToe.Web.Hubs;
 
 namespace UltimateTicTacToe
 {
@@ -45,6 +46,11 @@ namespace UltimateTicTacToe
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<GameHub>("gamehub");
             });
         }
     }
