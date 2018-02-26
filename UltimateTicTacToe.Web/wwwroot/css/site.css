@@ -3,3 +3,131 @@
     padding-bottom: 20px;
 }
 
+
+/**** Game Board *****/
+/*
+ *  GAME
+ *  Board size is calculated as follows:
+ *
+ *  .gameboard = .area * 3
+ *  459px = 153px * 3
+ *
+ *  .area = padding-left + .tile * 3 + padding-right + border
+ *  153px = 3px          + 48px  * 3 + 3px           + 3px
+ *
+ *  .tile = padding-left + .width    + padding-right
+ *   48px = 3px          + 42px      + 3px
+ */
+.gameboard {
+    width: 459px;
+    max-width: 459px;
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+    /* Clearfixing .game */
+    .gameboard:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+@media screen and (max-width: 500px) {
+    .gameboard {
+        width: 315px;
+    }
+}
+
+
+/*
+ *  AREA
+ */
+.area {
+    float: left;
+    width: 153px;
+    padding: 3px;
+}
+
+.area:nth-child(3n-1),
+.area:nth-child(3n-0) {
+    border-left: 3px solid #444;
+}
+
+.area:nth-child(n + 4) {
+    border-top: 3px solid #444;
+}
+
+
+/* Clearfixing .area */
+.area:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media screen and (max-width: 500px) {
+    .area {
+        width: 105px;
+    }
+}
+
+
+
+/*
+ *  TILE
+ */
+.tile {
+    float: left;
+    padding: 3px;
+}
+
+
+
+/*
+ *  BUTTONS
+ */
+.lastclicked {
+    background: none repeat scroll 0 0 #ffff00 !important;
+}
+
+.clickable {
+    background: none repeat scroll 0 0 #7FFF7F !important;
+}
+
+.wonX {
+    background: none repeat scroll 0 0 #00FFFF !important;
+}
+
+.wonO {
+    background: none repeat scroll 0 0 #FFCFCF !important;
+}
+
+.tile-button {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    cursor: pointer;
+    vertical-align: middle;
+    border: 1px solid gray;
+    border-radius: 3px;
+    background-color: greenYellow;
+}
+
+@media screen and (max-width: 500px) {
+    .tile-button {
+        width: 26px;
+        height: 26px;
+    }
+}
+
+.tile-button:hover,
+.tile-button:focus {
+    border-color: #444;
+    background-color: yellowGreen;
+}
+
+
+label.error {
+    color: #FF0000;
+}
