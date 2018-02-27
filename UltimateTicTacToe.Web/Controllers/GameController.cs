@@ -9,9 +9,13 @@ namespace UltimateTicTacToe.Web.Controllers
 {    
     public class GameController : Controller
     {
-        public IActionResult Index(int gameId)
+        //public GameController()
+
+        public IActionResult Index()
         {
             ViewBag.PlayerName = "";
+
+            
 
             return View();
         }

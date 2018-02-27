@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UltimateTicTacToe.Web.Hubs;
+using UltimateTicTacToe.Web.Logic;
 
 namespace UltimateTicTacToe
 {
@@ -24,6 +25,8 @@ namespace UltimateTicTacToe
         {
             services.AddMvc();
             services.AddSignalR();
+
+            services.AddTransient<IGameManager, GameManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
