@@ -19,10 +19,10 @@
                     <div class="form-group">
                         <label class="control-label" for="name">What do you call yourself?</label>
                         <input class="form-control" type="text" id="name" name="name" require/>
-                    </div>
-                    <input type="hidden" id="playerName" value="@ViewBag.PlayerName" />
-                    <input type="hidden" id="gameObject" value="@ViewBag.Game" />
-
+                        
+                        <input type="hidden" id="playerName" value="@ViewBag.PlayerName" />
+                        <input class="form-control" type="hidden" id="gameObject" name="gameObject" value="@ViewBag.Game" />
+                    </div>                   
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" id="btnSave">Save Name</button>
                         <a href="~/" type="button" class="btn btn-default">Cancel</a>
@@ -312,5 +312,23 @@
 </div>
 </div>
 
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            @if(Model != null)
+            {
+                <label>Player One: Model.PlayerA.Name</label>
+            }
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            @if(Model != null)
+                {
+                <label>Player Two: Model.PlayerB.Name</label>
+                }
+        </div>
+    </div>
+</div>
 
 <ul id="moveHistory"></ul>

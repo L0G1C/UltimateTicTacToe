@@ -32,15 +32,20 @@ namespace UltimateTicTacToe.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(Player player, Game game)
+        public IActionResult Index(Player player, Game gameObject, string name)
         {
             ViewBag.PlayerName = player.Name;
-            
-            //todo Check if game is a real object (then this is the 2nd player)
 
-            var existingGame = _gameManager.GetGame();
+            if (gameObject.GameId.Value != null)
+            {
+                var existingGame = _gameManager.GetGame(gameObject.GameId);
 
-            return View(existingGame);
+                if (existingGame.PlayerB == null)
+                    existingGame.PlayerB = new Player(){Name = name, ConnectionId = player.ConnectionId};
+                return View(existingGame);
+            }
+
+            return View();
         }
     }
 }
