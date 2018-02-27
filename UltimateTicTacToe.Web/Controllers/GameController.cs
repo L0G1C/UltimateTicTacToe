@@ -3,29 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using UltimateTicTacToe.Web.Logic;
 using UltimateTicTacToe.Web.Models;
 
 namespace UltimateTicTacToe.Web.Controllers
 {    
     public class GameController : Controller
     {
-        //public GameController()
+        private readonly IGameManager _gameManager;
+        public GameController(IGameManager gameManager)
+        {
+            _gameManager = gameManager;
+        }
 
-        public IActionResult Index()
+ 
+        public IActionResult Index(string id)
         {
             ViewBag.PlayerName = "";
+            var existingGame = _gameManager.GetGame(id);
+            if (existingGame != null)
+            {
+                ViewBag.Game = JsonConvert.SerializeObject(existingGame);
 
-            
+            }
+            return View(existingGame);
 
-            return View();
         }
 
         [HttpPost]
-        public IActionResult Index(Player player)
+        public IActionResult Index(Player player, Game game)
         {
             ViewBag.PlayerName = player.Name;
+            
+            //todo Check if game is a real object (then this is the 2nd player)
 
-            return View();
+            var existingGame = _gameManager.GetGame();
+
+            return View(existingGame);
         }
     }
 }
