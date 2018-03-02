@@ -12,6 +12,7 @@ namespace UltimateTicTacToe.Web.Controllers
     public class GameController : Controller
     {
         private readonly IGameManager _gameManager;
+
         public GameController(IGameManager gameManager)
         {
             _gameManager = gameManager;
@@ -32,16 +33,16 @@ namespace UltimateTicTacToe.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(Player player, Game gameObject, string name)
-        {
-            ViewBag.PlayerName = player.Name;
+        public IActionResult Index(string playerObjectString, string gameObjectString, string name)
+        {            
+            var gameObject = JsonConvert.DeserializeObject<Game>(gameObjectString);
+
+            ViewBag.PlayerName = name;          
 
             if (gameObject.GameId.Value != null)
             {
                 var existingGame = _gameManager.GetGame(gameObject.GameId);
-
-                if (existingGame.PlayerB == null)
-                    existingGame.PlayerB = new Player(){Name = name, ConnectionId = player.ConnectionId};
+                
                 return View(existingGame);
             }
 

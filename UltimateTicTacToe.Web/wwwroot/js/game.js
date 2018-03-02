@@ -41,17 +41,19 @@
                 connection.on('broadcastMessage',
                     function(name, message) {
                         // Add the move to the page history
-                        $("#moveHistory").append(name + ": " + message);
+                        $('#moveHistory').append(name + ": " + message);
                     });
 
                 connection.on('consoleLog',
-                    function(message) {
+                    function (message, connId) {
+                        var playerObj = { "Name": $('#playerName').val(), "ConnectionId" : connId}
                         console.log(message);
+                        $('#playerObjectString').val(JSON.stringify(playerObj));
                     });
 
                 connection.on('newGameInit',
                     function() {
-                        connection.invoke('newgame', playerName);
+                        connection.invoke('newgame', $('#playerObjectString').val());
                 });
 
                 connection.on('newGameComplete',
@@ -64,10 +66,10 @@
                     });
             })
             .then(function(connection) {
-                $(".tile").on('click',
-                    function() {
-                        connection.invoke('send', $("#playerName"));
-                    });
+                //$(".tile").on('click',
+                //    function() {
+                //        connection.invoke('send', $("#playerName"));
+                //    });
             })
             .catch(error => {
                 console.error(error.message);
