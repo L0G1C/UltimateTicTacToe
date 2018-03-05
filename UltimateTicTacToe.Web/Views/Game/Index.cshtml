@@ -314,22 +314,39 @@
 </div>
 
 
-<div class="container">
+@*<div class="container">
     <div class="row">
         <div class="col-md-4">
-            @if(Model != null)
+            @if (Model != null)
             {
-                <label>Player One: Model.PlayerA.Name</label>
+
+                if (Model.PlayerA != null)
+                 {
+                     <label>Player One: @Model.PlayerA.Name</label>
+                 }
+                 
+            }
+            else
+            {
+                <label>Player One: Waiting for all players...</label>
             }
         </div>
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            @if(Model != null)
-                {
-                <label>Player Two: Model.PlayerB.Name</label>
-                }
+        @if (Model != null)
+        {
+            if (Model.PlayerB != null)
+             {               
+                <label>Player Two: @Model.PlayerB.Name</label>               
+             }
+           
+        }
+        else
+        {
+            <label>Player Two: Waiting for all players...</label>
+        }
         </div>
     </div>
-</div>
+</div>*@
 
 <ul id="moveHistory"></ul>

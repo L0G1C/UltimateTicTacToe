@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.CodeAnalysis.CSharp;
 using Newtonsoft.Json;
 using UltimateTicTacToe.Web.Logic;
 using UltimateTicTacToe.Web.Models;
@@ -30,6 +31,10 @@ namespace UltimateTicTacToe.Web.Hubs
                 await Clients.Client(Context.ConnectionId).InvokeAsync("consoleLog", "Starting a new game");
                 await Clients.Client(Context.ConnectionId).InvokeAsync("newGameInit");               
             }
+            else
+            {                
+                // 
+            }
 
             await base.OnConnectedAsync();
         }
@@ -40,13 +45,15 @@ namespace UltimateTicTacToe.Web.Hubs
             Clients.All.InvokeAsync("broadcastMessage", name, message);
         }
 
-        public void NewGame(string player)
+        public async Task NewGame(string player)
         {
             var playerobj = JsonConvert.DeserializeObject<Player>(player);
 
             var gameId =_gameManager.CreateGame(playerobj.Name, playerobj.ConnectionId);
 
-            Clients.All.InvokeAsync("newGameComplete", gameId);
+            await Groups.AddAsync(Context.ConnectionId, gameId);
+
+            await  Clients.Group(gameId).InvokeAsync("newGameComplete", gameId);
         }
     }
 }
