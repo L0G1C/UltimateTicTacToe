@@ -68,10 +68,10 @@
                     });
 
                 connection.on('newGameComplete',
-                    function (gamecode) {                        
+                    function (gamecode, url) {                        
                         $('#inviteCode').html('Hi ' +
                             playerName +
-                            ', you\'re flyin solo right now. Get yourself a wingman (or wingwoman) and send them this link to join up: <span id="gameURL">http://localhost:65350/Game?id=' + gamecode + '</span>');
+                            ', you\'re flyin solo right now. Get yourself a wingman (or wingwoman) and send them this link to join up: <span id="gameURL">'+ url +'/Game?id=' + gamecode + '</span>');
                         $('#gameCode').html("Game code: " + gamecode);
                         $('#playerAlbl').html('Player One: ' +  $('#playerName').val());
                     });
@@ -139,5 +139,5 @@ var TileSelect = function (moveHistory) {
 
 var DisableTiles = function () {
     $('#inviteCode').html('Wait your turn...');
-    $('.tile-button').addClass('disabled').attr('disabled');
+    $('.tile-button').addClass("disabled").attr('disabled', 'disabled');
 };

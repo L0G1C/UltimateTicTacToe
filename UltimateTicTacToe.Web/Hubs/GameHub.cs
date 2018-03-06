@@ -54,7 +54,9 @@ namespace UltimateTicTacToe.Web.Hubs
 
             await Groups.AddAsync(Context.ConnectionId, gameId);
 
-            await  Clients.Group(gameId).InvokeAsync("newGameComplete", gameId);
+            //var url = "http://localhost:65350";
+            var url = "http://ultimatetictactoeweb20180226014509.azurewebsites.net";
+            await  Clients.Group(gameId).InvokeAsync("newGameComplete", gameId, url);
         }
 
         public async Task AddPlayer(string player, string gameId)
