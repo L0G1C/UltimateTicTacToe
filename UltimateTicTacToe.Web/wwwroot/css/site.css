@@ -114,6 +114,10 @@
     background-color: greenYellow;
 }
 
+.tile-button.disabled {
+    background-color: gray;
+}
+
 @media screen and (max-width: 500px) {
     .tile-button {
         width: 26px;
@@ -130,4 +134,14 @@
 
 label.error {
     color: #FF0000;
+}
+
+
+#inviteDiv {    
+    font-size: 14px;
+    padding-top: 15px;
+}
+
+#gameURL {
+    font-size: 20px;    
 }
