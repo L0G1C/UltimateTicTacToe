@@ -15,7 +15,7 @@ namespace UltimateTicTacToe.Web.Logic
 
         public GameState GetGameState(string connectionId)
         {
-            var existingGame = _games.FirstOrDefault(g => g.MoveHistory.ContainsKey(connectionId));
+            var existingGame = _games.FirstOrDefault(g => g.PlayerA.ConnectionId == connectionId);
             if (existingGame == null)
             {
                 return GameState.NewGame;
@@ -58,12 +58,19 @@ namespace UltimateTicTacToe.Web.Logic
             return newGameId.ToString();
         }
 
-        public Game GetGame(string gameCode)
+        public Game GetGame(string gameId)
         {
-            if(!string.IsNullOrEmpty(gameCode))
-                return _games.FirstOrDefault(g => g.GameId == gameCode);
+            if(!string.IsNullOrEmpty(gameId))
+                return _games.FirstOrDefault(g => g.GameId == gameId);
             else 
                 return new Game();
+        }
+
+        public void SetActivePlayer(string playerConnectionId, string gameId)
+        {
+            var game = _games.FirstOrDefault(g => g.GameId == gameId);
+
+            game.ActivePlayer = playerConnectionId;
         }
     }
 }

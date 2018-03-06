@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CSharpVitamins;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.CodeAnalysis.CSharp;
 using Newtonsoft.Json;
@@ -54,6 +55,27 @@ namespace UltimateTicTacToe.Web.Hubs
             await Groups.AddAsync(Context.ConnectionId, gameId);
 
             await  Clients.Group(gameId).InvokeAsync("newGameComplete", gameId);
+        }
+
+        public async Task AddPlayer(string player, string gameId)
+        {
+            // User is connecting to Existing game. Add the Player Obj to the existing game            
+            var playerObj = JsonConvert.DeserializeObject<Player>(player);
+            var gameIdObj = JsonConvert.DeserializeObject<ShortGuid>(gameId);
+            var existingGame = _gameManager.GetGame(gameIdObj);
+            existingGame.PlayerB = playerObj;
+
+            await Groups.AddAsync(Context.ConnectionId, gameIdObj.Value);
+
+            // Choose an active player and begin the game!
+            Random rand = new Random();
+            var activePlayer = rand.Next(2);
+            if (activePlayer == 0)
+                _gameManager.SetActivePlayer(existingGame.PlayerA.ConnectionId, existingGame.GameId);
+            if (activePlayer == 1)
+                _gameManager.SetActivePlayer(existingGame.PlayerB.ConnectionId, existingGame.GameId);
+
+            await Clients.Group(gameIdObj.Value).InvokeAsync("playerTurn", existingGame);
         }
     }
 }

@@ -35,7 +35,7 @@
 </div>
 
 
-<div class="container hidden" id="inviteDiv">
+<div class="container" id="inviteDiv">
     <div class="row">
         <div class="col-md-5">
             <label id="inviteCode"></label>
@@ -314,7 +314,7 @@
 </div>
 
 
-@*<div class="container">
+<div class="container">
     <div class="row">
         <div class="col-md-4">
             @if (Model != null)
@@ -322,13 +322,13 @@
 
                 if (Model.PlayerA != null)
                  {
-                     <label>Player One: @Model.PlayerA.Name</label>
+                     <label id="playerAlbl">Player One: @Model.PlayerA.Name</label>
                  }
                  
             }
             else
             {
-                <label>Player One: Waiting for all players...</label>
+                <label id="playerAlbl">Player One: Waiting for all players...</label>
             }
         </div>
         <div class="col-md-4"></div>
@@ -337,16 +337,16 @@
         {
             if (Model.PlayerB != null)
              {               
-                <label>Player Two: @Model.PlayerB.Name</label>               
+                <label id="playerBlbl">Player Two: @Model.PlayerB.Name</label>               
              }
            
         }
         else
         {
-            <label>Player Two: Waiting for all players...</label>
+            <label id="playerBlbl">Player Two: Waiting for all players...</label>
         }
         </div>
     </div>
-</div>*@
+</div>
 
 <ul id="moveHistory"></ul>

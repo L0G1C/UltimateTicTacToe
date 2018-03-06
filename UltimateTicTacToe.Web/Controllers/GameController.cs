@@ -42,7 +42,8 @@ namespace UltimateTicTacToe.Web.Controllers
             if (gameObject.GameId.Value != null)
             {
                 var existingGame = _gameManager.GetGame(gameObject.GameId);
-                
+                ViewBag.Game = JsonConvert.SerializeObject(existingGame);
+
                 return View(existingGame);
             }
 

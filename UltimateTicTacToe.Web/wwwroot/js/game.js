@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    // Get the user name and store it to prepend chat and move history.
+    // Get the user name and store it to prepend chat and move history.    
     if ($("#playerName").val() === "" || $("#playerName").val() == undefined) {
 
         var name = $(".modal").modal();
@@ -46,30 +46,53 @@
 
                 connection.on('consoleLog',
                     function (message, connId) {
-                        var playerObj = { "Name": $('#playerName').val(), "ConnectionId" : connId}
                         console.log(message);
-                        $('#playerObjectString').val(JSON.stringify(playerObj));
+
+                        if (connId != undefined) {
+                            var playerObj = { "Name": $('#playerName').val(), "ConnectionId": connId }                         
+                            $('#playerObjectString').val(JSON.stringify(playerObj));
+
+                            if ($('#gameObjectString').val() != undefined && $('#gameObjectString').val() !== "") {
+                                var gameObj = $.parseJSON($('#gameObjectString').val());
+                                // This is joining Player so set him up in game.
+                                connection.invoke('AddPlayer', $('#playerObjectString').val(), JSON.stringify(gameObj.GameId));
+                            }
+                        }
                     });
 
                 connection.on('newGameInit',
-                    function() {
-                        connection.invoke('newgame', $('#playerObjectString').val());
-                });
+                    function () {
+                        if ($('#gameObjectString').val() === "" || $('#gameObjectString').val() == undefined) {
+                            connection.invoke('newgame', $('#playerObjectString').val());
+                        }
+                    });
 
                 connection.on('newGameComplete',
-                    function (gamecode) {
-                        $('#inviteDiv').removeClass("hidden");
+                    function (gamecode) {                        
                         $('#inviteCode').html('Hi ' +
                             playerName +
                             ', you\'re flyin solo right now. Get yourself a wingman (or wingwoman) and send them this link to join up: <span id="gameURL">http://localhost:65350/Game?id=' + gamecode + '</span>');
                         $('#gameCode').html("Game code: " + gamecode);
+                        $('#playerAlbl').html('Player One: ' +  $('#playerName').val());
+                    });
+
+                connection.on('playerTurn',
+                    function (game) {
+                        var thisPlayer = $.parseJSON($('#playerObjectString').val());
+                        $('#playerBlbl').html('Player Two: ' + game.playerB.name);                        
+                        // alter gameboard based on gameObject (active player, moveHistory, etc)
+                        if (game.activePlayer === thisPlayer.ConnectionId) {
+                            TileSelect(game.moveHistory);
+                        } else {
+                            DisableTiles();
+                        }
                     });
             })
-            .then(function(connection) {
-                //$(".tile").on('click',
-                //    function() {
-                //        connection.invoke('send', $("#playerName"));
-                //    });
+            .then(function (connection) {
+             $(".tile").on('click',
+                    function() {
+                        connection.invoke('tileClicked', $("#playerName"));
+                    });
             })
             .catch(error => {
                 console.error(error.message);
@@ -81,7 +104,7 @@
         // any of the available transports the function will return a rejected Promise.
         function startConnection(url, configureConnection) {
             return function start(transport) {
-                console.log(`Starting connection using ${signalR.TransportType[transport]} transport`)
+                console.log(`Starting connection using ${signalR.TransportType[transport]} transport`);
                 var connection = new signalR.HubConnection(url, { transport: transport });
                 if (configureConnection && typeof configureConnection === 'function') {
                     configureConnection(connection);
@@ -105,3 +128,16 @@
         }
     }
 });
+
+
+var TileSelect = function (moveHistory) {
+    $('#inviteCode').html('Make your move!!');
+    if (moveHistory != null) {
+        // Look at last move and depending on what was clicked, highlight that tic tac toe game.
+    }
+};
+
+var DisableTiles = function () {
+    $('#inviteCode').html('Wait your turn...');
+    $('.tile-button').addClass('disabled').attr('disabled');
+};

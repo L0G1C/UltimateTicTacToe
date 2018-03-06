@@ -6,6 +6,7 @@ namespace UltimateTicTacToe.Web.Logic
     {
         GameState GetGameState(string connectionId);
         string CreateGame(string name, string connectionId);
-        Game GetGame(string gameCode);
+        Game GetGame(string gameId);
+        void SetActivePlayer(string playerConnectionId, string gameId);
     }
 }

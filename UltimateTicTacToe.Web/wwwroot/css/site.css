@@ -114,6 +114,10 @@
     background-color: greenYellow;
 }
 
+.tile-button.disabled {
+    background-color: gray;
+}
+
 @media screen and (max-width: 500px) {
     .tile-button {
         width: 26px;

@@ -11,6 +11,7 @@ namespace UltimateTicTacToe.Web.Models
         public ShortGuid GameId;
         public Dictionary<string, string> MoveHistory;
         public Player PlayerA;
-        public Player PlayerB;        
+        public Player PlayerB;
+        public string ActivePlayer;
     }
 }
