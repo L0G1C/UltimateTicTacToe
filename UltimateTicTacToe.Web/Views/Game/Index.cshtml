@@ -333,18 +333,18 @@
         </div>
         <div class="col-md-4"></div>
         <div class="col-md-4">
-        @if (Model != null)
-        {
-            if (Model.PlayerB != null)
-             {               
-                <label id="playerBlbl">Player Two: @Model.PlayerB.Name</label>               
-             }
+            @if (Model != null)
+            {
+                if (Model.PlayerB != null)
+                 {               
+                    <label id="playerBlbl">Player Two: @Model.PlayerB.Name</label>               
+                 }
            
-        }
-        else
-        {
-            <label id="playerBlbl">Player Two: Waiting for all players...</label>
-        }
+            }
+            else
+            {
+                <label id="playerBlbl">Player Two: Waiting for all players...</label>
+            }
         </div>
     </div>
 </div>

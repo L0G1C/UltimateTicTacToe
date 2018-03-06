@@ -117,6 +117,10 @@
 .tile-button.disabled {
     background-color: gray;
 }
+.tile-button.disabled:hover {
+    background-color: gray;
+}
+
 
 @media screen and (max-width: 500px) {
     .tile-button {
